@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"github.com/hiway-media/evo"
+	"github.com/getevo/evo"
 )
 
 type Widget struct {

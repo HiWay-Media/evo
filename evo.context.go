@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
+	e "github.com/getevo/evo/errors"
+	"github.com/getevo/evo/lib/jwt"
+	"github.com/getevo/evo/lib/log"
 	"github.com/gofiber/fiber/v2"
-	e "github.com/hiway-media/evo/errors"
-	"github.com/hiway-media/evo/lib/jwt"
-	"github.com/hiway-media/evo/lib/log"
 )
 
 type Request struct {

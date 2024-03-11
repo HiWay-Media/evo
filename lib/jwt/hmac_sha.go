@@ -3,7 +3,7 @@ package jwt
 import (
 	"crypto"
 	"crypto/hmac"
-	"github.com/hiway-media/evo/lib/jwt/internal"
+	"github.com/getevo/evo/lib/jwt/internal"
 	"hash"
 )
 

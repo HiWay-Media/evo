@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/hiway-media/evo/lib/validate"
+	"github.com/getevo/evo/lib/validate"
 	"gorm.io/gorm"
 )
 

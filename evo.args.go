@@ -2,8 +2,8 @@ package evo
 
 import (
 	"github.com/creasty/defaults"
-	"github.com/hiway-media/evo/lib/log"
-	"github.com/hiway-media/go-arg"
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/go-arg"
 )
 
 type args struct {

@@ -2,14 +2,14 @@ package settings
 
 import (
 	"encoding/json"
-	"github.com/hiway-media/evo"
-	"github.com/hiway-media/evo/errors"
-	"github.com/hiway-media/evo/html"
-	"github.com/hiway-media/evo/i18"
-	"github.com/hiway-media/evo/lib"
-	"github.com/hiway-media/evo/lib/constant"
-	"github.com/hiway-media/evo/lib/ref"
-	"github.com/hiway-media/evo/lib/text"
+	"github.com/getevo/evo"
+	"github.com/getevo/evo/errors"
+	"github.com/getevo/evo/html"
+	"github.com/getevo/evo/i18"
+	"github.com/getevo/evo/lib"
+	"github.com/getevo/evo/lib/constant"
+	"github.com/getevo/evo/lib/ref"
+	"github.com/getevo/evo/lib/text"
 	"reflect"
 	"strings"
 )

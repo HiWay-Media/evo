@@ -2,8 +2,8 @@ package viewfn
 
 import (
 	"github.com/disintegration/imaging"
-	"github.com/hiway-media/evo/lib/gpath"
-	"github.com/hiway-media/evo/lib/log"
+	"github.com/getevo/evo/lib/gpath"
+	"github.com/getevo/evo/lib/log"
 	jet "github.com/iesreza/jet/v8"
 	"os"
 	"path/filepath"

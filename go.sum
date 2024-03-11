@@ -63,8 +63,8 @@ github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWo
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/gbrlsnchs/jwt/v3 v3.0.0 h1:gtPjdT3gAbBLjVckJsgNf+a46sqrCBfRebg2r/NysIo=
 github.com/gbrlsnchs/jwt/v3 v3.0.0/go.mod h1:AncDcjXz18xetI3A6STfXq2w+LuTx8pQ8bGEwRN8zVM=
-github.com/hiway-media/go-arg v1.4.0 h1:IEVQCEKGaBenUiAMM0lLp/JJiuJXT3NAnOoSuImhqjw=
-github.com/hiway-media/go-arg v1.4.0/go.mod h1:GbrDgZh48tCXU/twkrVD3hmMWyc79Oknn4FALhWtFz4=
+github.com/getevo/go-arg v1.4.0 h1:IEVQCEKGaBenUiAMM0lLp/JJiuJXT3NAnOoSuImhqjw=
+github.com/getevo/go-arg v1.4.0/go.mod h1:GbrDgZh48tCXU/twkrVD3hmMWyc79Oknn4FALhWtFz4=
 github.com/go-ole/go-ole v1.2.5 h1:t4MGB5xEDZvXI+0rMjjsfBsD7yAgp/s9ZDkL1JndXwY=
 github.com/go-ole/go-ole v1.2.5/go.mod h1:pprOEPIfldk/42T2oK7lQ4v4JSDwmV0As9GaiUsvbm0=
 github.com/go-playground/locales v0.13.0 h1:HyWk6mgj5qFqCT5fjGBuRArbVDfE4hi8+e8ceBS/t7Q=

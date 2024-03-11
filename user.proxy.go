@@ -3,9 +3,9 @@ package evo
 import (
 	"errors"
 	"fmt"
-	"github.com/hiway-media/evo/lib/jwt"
-	"github.com/hiway-media/evo/lib/log"
-	"github.com/hiway-media/evo/lib/validate"
+	"github.com/getevo/evo/lib/jwt"
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/evo/lib/validate"
 	"github.com/nbutton23/zxcvbn-go"
 	"gopkg.in/hlandau/passlib.v1"
 	"gorm.io/gorm"

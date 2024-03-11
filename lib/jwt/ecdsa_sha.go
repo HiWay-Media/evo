@@ -4,8 +4,9 @@ import (
 	"crypto"
 	"crypto/ecdsa"
 	"crypto/rand"
-	"github.com/hiway-media/evo/lib/jwt/internal"
+	"github.com/getevo/evo/lib/jwt/internal"
 	"math/big"
+
 )
 
 var (

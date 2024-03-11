@@ -1,10 +1,10 @@
 package evo
 
 import (
-	"github.com/hiway-media/evo/lib/gpath"
-	"github.com/hiway-media/evo/lib/log"
-	"github.com/hiway-media/evo/lib/ref"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo/lib/gpath"
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/evo/lib/ref"
+	"github.com/getevo/evo/menu"
 	"go/build"
 	"reflect"
 	"strings"

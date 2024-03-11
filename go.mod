@@ -1,4 +1,4 @@
-module github.com/hiway-media/evo
+module github.com/getevo/evo
 
 go 1.15
 
@@ -20,7 +20,7 @@ require (
 	github.com/fatih/structs v1.1.0
 	github.com/fatih/structtag v1.2.0
 	github.com/gbrlsnchs/jwt/v3 v3.0.0
-	github.com/hiway-media/go-arg v1.4.0
+	github.com/getevo/go-arg v1.4.0
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible

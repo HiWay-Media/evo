@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/hiway-media/evo"
+	"github.com/getevo/evo"
 )
 
 type MyModel struct {

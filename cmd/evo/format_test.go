@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hiway-media/evo/lib/gpath"
+	"github.com/getevo/evo/lib/gpath"
 	"testing"
 )
 

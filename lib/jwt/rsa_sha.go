@@ -4,7 +4,7 @@ import (
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
-	"github.com/hiway-media/evo/lib/jwt/internal"
+	"github.com/getevo/evo/lib/jwt/internal"
 )
 
 var (

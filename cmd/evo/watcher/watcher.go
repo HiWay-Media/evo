@@ -11,8 +11,8 @@ import (
 	"sync"
 	"time"
 )
-import "github.com/hiway-media/evo/lib/text"
-import "github.com/hiway-media/evo/lib/gpath"
+import "github.com/getevo/evo/lib/text"
+import "github.com/getevo/evo/lib/gpath"
 
 var mu sync.Mutex
 var files = map[string]int64{}

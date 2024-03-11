@@ -2,10 +2,10 @@ package rdb
 
 import (
 	"fmt"
-	"github.com/hiway-media/evo"
-	"github.com/hiway-media/evo/lib/concurrent"
-	"github.com/hiway-media/evo/lib/fontawesome"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo"
+	"github.com/getevo/evo/lib/concurrent"
+	"github.com/getevo/evo/lib/fontawesome"
+	"github.com/getevo/evo/menu"
 	"gorm.io/gorm"
 )
 

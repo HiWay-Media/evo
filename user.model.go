@@ -2,8 +2,8 @@ package evo
 
 import (
 	"encoding/json"
-	"github.com/hiway-media/evo/lib/data"
-	"github.com/hiway-media/evo/lib/text"
+	"github.com/getevo/evo/lib/data"
+	"github.com/getevo/evo/lib/text"
 	"gorm.io/gorm"
 	"time"
 )
