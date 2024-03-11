@@ -3,6 +3,12 @@ package evo
 import (
 	"crypto/tls"
 	"fmt"
+	"net"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+
 	"github.com/AlexanderGrom/go-event"
 	"github.com/getevo/evo/lib/gpath"
 	"github.com/getevo/evo/lib/jwt"
@@ -15,11 +21,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	recovermd "github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
-	"net"
-	"os"
-	"path/filepath"
-	"strings"
-	"time"
 )
 
 var (
@@ -53,6 +54,7 @@ func Setup() {
 		CaseSensitive: config.Server.CaseSensitive,
 		ServerHeader:  config.Server.Name,
 		BodyLimit:     int(bodySize),
+		ProxyHeader:   config.Server.ProxyHeader,
 	})
 
 	if config.CORS.Enabled {

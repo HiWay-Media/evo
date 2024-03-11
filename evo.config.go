@@ -2,10 +2,6 @@ package evo
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib/gpath"
-	"github.com/getevo/evo/lib/text"
-	"github.com/mitchellh/mapstructure"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"os"
@@ -14,6 +10,11 @@ import (
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/getevo/evo/lib/gpath"
+	"github.com/getevo/evo/lib/text"
+	"github.com/mitchellh/mapstructure"
+	"gopkg.in/yaml.v2"
 )
 
 var WorkingDir string
@@ -72,6 +73,7 @@ type Configuration struct {
 		RequestID     bool   `yaml:"request-id"`
 		Debug         bool   `yaml:"debug"`
 		Recover       bool   `yaml:"recover"`
+		ProxyHeader   string `yaml:"proxy-header"`
 	} `yaml:"server"`
 
 	Database struct {
