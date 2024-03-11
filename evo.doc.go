@@ -1,8 +1,8 @@
 package evo
 
 import (
-	"github.com/getevo/evo/lib/gpath"
-	"github.com/getevo/evo/menu"
+	"github.com/hiway-media/evo/lib/gpath"
+	"github.com/hiway-media/evo/menu"
 	"go/build"
 	"os"
 	"path/filepath"

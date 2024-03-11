@@ -10,8 +10,8 @@ Example usage of keycloak:
 package main
 
 import (
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/apps/keycloak"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/apps/keycloak"
 )
 
 func main() {
@@ -22,4 +22,4 @@ func main() {
 }
 ```
 
-[Keycloak Example Project](https://github.com/getevo/examples/tree/master/keycloak_example)
+[Keycloak Example Project](https://github.com/hiway-media/examples/tree/master/keycloak_example)

@@ -1,4 +1,4 @@
-module github.com/getevo/go-arg
+module github.com/hiway-media/go-arg
 
 go 1.14
 

@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/html"
-	"github.com/getevo/evo/lib/T"
-	"github.com/getevo/evo/menu"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/html"
+	"github.com/hiway-media/evo/lib/T"
+	"github.com/hiway-media/evo/menu"
 )
 
 type ColumnType int

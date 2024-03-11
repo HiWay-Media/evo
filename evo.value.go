@@ -2,7 +2,7 @@ package evo
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib"
+	"github.com/hiway-media/evo/lib"
 	"regexp"
 	"strconv"
 	"strings"

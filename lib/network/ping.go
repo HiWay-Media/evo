@@ -2,7 +2,7 @@ package network
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib"
+	"github.com/hiway-media/evo/lib"
 	"os/exec"
 	"regexp"
 	"runtime"

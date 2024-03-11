@@ -1,10 +1,10 @@
 package websocket
 
 import (
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/menu"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/websocket"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/menu"
 )
 
 func Register() {

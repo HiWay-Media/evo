@@ -1,6 +1,6 @@
 package settings
 
-import "github.com/getevo/evo"
+import "github.com/hiway-media/evo"
 
 type Settings struct {
 	evo.Model

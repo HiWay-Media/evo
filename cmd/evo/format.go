@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib/gpath"
+	"github.com/hiway-media/evo/lib/gpath"
 	"os"
 	"path/filepath"
 	"regexp"

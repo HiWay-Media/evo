@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/apps/auth"
-	"github.com/getevo/evo/lib/log"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/apps/auth"
+	"github.com/hiway-media/evo/lib/log"
 	"os"
 	"strings"
 )

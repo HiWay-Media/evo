@@ -2,7 +2,7 @@ package admin
 
 import (
 	"fmt"
-	"github.com/getevo/evo"
+	"github.com/hiway-media/evo"
 	"reflect"
 	"sync"
 )

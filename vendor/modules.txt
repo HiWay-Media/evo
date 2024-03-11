@@ -63,9 +63,9 @@ github.com/fatih/structtag
 # github.com/gbrlsnchs/jwt/v3 v3.0.0
 ## explicit
 github.com/gbrlsnchs/jwt/v3/internal
-# github.com/getevo/go-arg v1.4.0
+# github.com/hiway-media/go-arg v1.4.0
 ## explicit
-github.com/getevo/go-arg
+github.com/hiway-media/go-arg
 # github.com/go-ole/go-ole v1.2.5
 ## explicit
 github.com/go-ole/go-ole

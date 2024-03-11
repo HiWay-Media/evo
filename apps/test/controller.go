@@ -1,10 +1,10 @@
 package test
 
 import (
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/html"
-	"github.com/getevo/evo/lib/fontawesome"
-	"github.com/getevo/evo/viewfn"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/html"
+	"github.com/hiway-media/evo/lib/fontawesome"
+	"github.com/hiway-media/evo/viewfn"
 )
 
 type Controller struct{}

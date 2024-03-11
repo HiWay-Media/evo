@@ -2,9 +2,9 @@ package rdb
 
 import (
 	"database/sql"
-	"github.com/getevo/evo"
-	"github.com/getevo/evo/lib/log"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/hiway-media/evo"
+	"github.com/hiway-media/evo/lib/log"
 	"github.com/jackskj/carta"
 	"strings"
 	"sync"
