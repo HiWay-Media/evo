@@ -2,9 +2,9 @@ package test
 
 import (
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/html"
-	"github.com/hiway-media/evo/lib/fontawesome"
-	"github.com/hiway-media/evo/viewfn"
+	"github.com/getevo/evo/html"
+	"github.com/getevo/evo/lib/fontawesome"
+	"github.com/getevo/evo/viewfn"
 )
 
 type Controller struct{}

@@ -2,11 +2,10 @@ package evo
 
 import (
 	"encoding/json"
-	"time"
-
-	"github.com/hiway-media/evo/lib/data"
-	"github.com/hiway-media/evo/lib/text"
+	"github.com/getevo/evo/lib/data"
+	"github.com/getevo/evo/lib/text"
 	"gorm.io/gorm"
+	"time"
 )
 
 /*// Model common model stuff

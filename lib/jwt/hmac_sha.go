@@ -3,9 +3,8 @@ package jwt
 import (
 	"crypto"
 	"crypto/hmac"
+	"github.com/getevo/evo/lib/jwt/internal"
 	"hash"
-
-	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 var (

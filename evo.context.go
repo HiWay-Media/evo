@@ -4,17 +4,16 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/iesreza/jet/v8"
 	"net/url"
 	"reflect"
 	"strings"
 	"time"
 
-	"github.com/iesreza/jet/v8"
-
+	e "github.com/getevo/evo/errors"
+	"github.com/getevo/evo/lib/jwt"
+	"github.com/getevo/evo/lib/log"
 	"github.com/gofiber/fiber/v2"
-	e "github.com/hiway-media/evo/errors"
-	"github.com/hiway-media/evo/lib/jwt"
-	"github.com/hiway-media/evo/lib/log"
 )
 
 type Request struct {

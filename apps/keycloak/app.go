@@ -2,14 +2,13 @@ package keycloak
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
-
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/lib/log"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/evo/menu"
 	"gopkg.in/square/go-jose.v2"
 	"gopkg.in/square/go-jose.v2/json"
+	"io/ioutil"
+	"net/http"
 )
 
 var Server string

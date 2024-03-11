@@ -2,15 +2,14 @@
 // @doc name		auth
 // @doc description authentication api
 // @doc author		reza
-// @doc include		github.com/hiway-media/evo/user.model.go
+// @doc include		github.com/getevo/evo/user.model.go
 package auth
 
 import (
 	"fmt"
-
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/apps/query"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo/apps/query"
+	"github.com/getevo/evo/menu"
 	"gorm.io/gorm"
 )
 

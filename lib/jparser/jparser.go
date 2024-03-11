@@ -3,13 +3,12 @@ package jparser
 import (
 	"encoding/json"
 	"fmt"
-	"reflect"
-
 	"github.com/fatih/structs"
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/lib/log"
+	"github.com/getevo/evo/lib/log"
 	"github.com/tidwall/gjson"
 	"gorm.io/gorm"
+	"reflect"
 )
 
 func RegisterDBPlugin() {

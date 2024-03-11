@@ -2,8 +2,7 @@ package jwt
 
 import (
 	"bytes"
-
-	"github.com/hiway-media/evo/lib/jwt/internal"
+	"github.com/getevo/evo/lib/jwt/internal"
 )
 
 // ErrAlgValidation indicates an incoming JWT's "alg" field mismatches the Validator's.

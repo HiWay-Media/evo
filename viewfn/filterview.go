@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/html"
-	"github.com/hiway-media/evo/lib/T"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo/html"
+	"github.com/getevo/evo/lib/T"
+	"github.com/getevo/evo/menu"
 )
 
 type ColumnType int

@@ -2,9 +2,8 @@ package jwt
 
 import (
 	"encoding/json"
+	"github.com/getevo/evo/lib/jwt/internal"
 	"time"
-
-	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 // Time is the allowed format for time, as per the RFC 7519.

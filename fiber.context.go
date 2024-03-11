@@ -3,20 +3,19 @@ package evo
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/ajg/form"
+	"github.com/avct/uasurfer"
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/evo/lib/text"
+	"github.com/gofiber/utils"
+	"github.com/klauspost/compress/snappy"
+	"github.com/valyala/fasthttp"
 	"io"
 	"mime/multipart"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/ajg/form"
-	"github.com/avct/uasurfer"
-	"github.com/gofiber/utils"
-	"github.com/hiway-media/evo/lib/log"
-	"github.com/hiway-media/evo/lib/text"
-	"github.com/klauspost/compress/snappy"
-	"github.com/valyala/fasthttp"
 )
 
 // Cookie data for ctx.Cookie
@@ -202,7 +201,7 @@ func (r *Request) FormValueI(key string, params ...string) value {
 	return Value(r.Context.FormValue(key), params...)
 }
 
-// Fresh not implemented yet
+//Fresh not implemented yet
 func (r *Request) Fresh() bool {
 	return r.Context.Fresh()
 }

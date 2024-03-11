@@ -3,9 +3,8 @@ package bible
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/menu"
+	"github.com/getevo/evo/menu"
 )
 
 func Register() {

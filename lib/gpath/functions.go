@@ -1,14 +1,13 @@
 package gpath
 
 import (
+	"github.com/getevo/evo/lib/text"
+	copy2 "github.com/otiai10/copy"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/hiway-media/evo/lib/text"
-	copy2 "github.com/otiai10/copy"
 )
 
 // MakePath create path recursive

@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/getevo/evo/cmd/evo/watcher"
+	"github.com/getevo/evo/lib/cli"
+	"github.com/getevo/evo/lib/gpath"
+	"github.com/getevo/evo/lib/log"
 	"os"
 	"path/filepath"
 	"time"
-
-	"github.com/hiway-media/evo/cmd/evo/watcher"
-	"github.com/hiway-media/evo/lib/cli"
-	"github.com/hiway-media/evo/lib/gpath"
-	"github.com/hiway-media/evo/lib/log"
 )
 
 type Build struct {

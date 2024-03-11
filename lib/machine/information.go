@@ -3,6 +3,11 @@ package machine
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/getevo/evo/lib"
+	"github.com/getevo/evo/lib/network"
+	"github.com/gocarina/gocsv"
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/mem"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -12,12 +17,6 @@ import (
 	"strings"
 	"time"
 	"unicode"
-
-	"github.com/gocarina/gocsv"
-	"github.com/hiway-media/evo/lib"
-	"github.com/hiway-media/evo/lib/network"
-	"github.com/shirou/gopsutil/cpu"
-	"github.com/shirou/gopsutil/mem"
 )
 
 // DiskDrive disk drive info struct

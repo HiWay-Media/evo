@@ -1,9 +1,8 @@
 package main
 
 import (
+	"github.com/getevo/evo/lib/gpath"
 	"testing"
-
-	"github.com/hiway-media/evo/lib/gpath"
 )
 
 func Test_FormatStruct(t *testing.T) {

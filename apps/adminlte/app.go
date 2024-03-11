@@ -2,11 +2,10 @@ package adminlte
 
 import (
 	"fmt"
-
 	"github.com/getevo/evo"
-	"github.com/hiway-media/evo/apps/settings"
-	"github.com/hiway-media/evo/menu"
-	"github.com/hiway-media/evo/viewfn"
+	"github.com/getevo/evo/apps/settings"
+	"github.com/getevo/evo/menu"
+	"github.com/getevo/evo/viewfn"
 )
 
 // Register register the adminlte in io apps
@@ -14,7 +13,7 @@ func Register() {
 	evo.Register(App{})
 }
 
-// Path to adminlte app
+//Path to adminlte app
 var Path string
 
 // App adminlte app struct

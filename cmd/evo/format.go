@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/getevo/evo/lib/gpath"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
-
-	"github.com/hiway-media/evo/lib/gpath"
 )
 
 func format() {
