@@ -2,9 +2,10 @@ package keycloak
 
 import (
 	"fmt"
+
 	"github.com/getevo/evo"
-	"github.com/getevo/evo/lib/data"
-	"github.com/getevo/evo/lib/log"
+	"github.com/hiway-media/evo/lib/data"
+	"github.com/hiway-media/evo/lib/log"
 	"gopkg.in/square/go-jose.v2/jwt"
 )
 

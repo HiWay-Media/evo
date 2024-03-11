@@ -3,7 +3,8 @@ package jwt
 import (
 	"encoding/base64"
 	"encoding/json"
-	"github.com/getevo/evo/lib/jwt/internal"
+
+	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 // SignOption is a functional option for signing.

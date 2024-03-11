@@ -2,11 +2,12 @@ package admin
 
 import (
 	"fmt"
+
 	"github.com/getevo/evo"
-	"github.com/getevo/evo/apps/auth"
-	"github.com/getevo/evo/apps/settings"
-	"github.com/getevo/evo/lib/fontawesome"
-	"github.com/getevo/evo/menu"
+	"github.com/hiway-media/evo/apps/auth"
+	"github.com/hiway-media/evo/apps/settings"
+	"github.com/hiway-media/evo/lib/fontawesome"
+	"github.com/hiway-media/evo/menu"
 	"github.com/iesreza/jet/v8"
 )
 
@@ -18,7 +19,7 @@ func Register() {
 
 var db = evo.GetDBO()
 
-//Path to admin app
+// Path to admin app
 var Path string
 
 // App admin app struct

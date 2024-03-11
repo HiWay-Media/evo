@@ -1,10 +1,12 @@
+//go:build go1.13
 // +build go1.13
 
 package jwt
 
 import (
 	"crypto/ed25519"
-	"github.com/getevo/evo/lib/jwt/internal"
+
+	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 var (

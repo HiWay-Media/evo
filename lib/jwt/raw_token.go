@@ -2,7 +2,8 @@ package jwt
 
 import (
 	"encoding/json"
-	"github.com/getevo/evo/lib/jwt/internal"
+
+	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 // ErrMalformed indicates a token doesn't have a valid format, as per the RFC 7519.

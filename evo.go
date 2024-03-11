@@ -10,17 +10,17 @@ import (
 	"time"
 
 	"github.com/AlexanderGrom/go-event"
-	"github.com/getevo/evo/lib/gpath"
-	"github.com/getevo/evo/lib/jwt"
-	"github.com/getevo/evo/lib/log"
-	"github.com/getevo/evo/lib/text"
-	"github.com/getevo/evo/lib/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	recovermd "github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/hiway-media/evo/lib/gpath"
+	"github.com/hiway-media/evo/lib/jwt"
+	"github.com/hiway-media/evo/lib/log"
+	"github.com/hiway-media/evo/lib/text"
+	"github.com/hiway-media/evo/lib/utils"
 )
 
 var (

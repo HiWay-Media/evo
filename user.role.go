@@ -3,8 +3,9 @@ package evo
 import (
 	"errors"
 	"fmt"
-	"github.com/getevo/evo/lib/log"
-	"github.com/getevo/evo/lib/validate"
+
+	"github.com/hiway-media/evo/lib/log"
+	"github.com/hiway-media/evo/lib/validate"
 	"gorm.io/gorm"
 )
 

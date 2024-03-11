@@ -2,12 +2,13 @@ package network
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib"
 	"os/exec"
 	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
+
+	"github.com/hiway-media/evo/lib"
 )
 
 // PingResult ping result struct

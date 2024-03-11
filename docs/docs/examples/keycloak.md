@@ -11,7 +11,7 @@ package main
 
 import (
 	"github.com/getevo/evo"
-	"github.com/getevo/evo/apps/keycloak"
+	"github.com/hiway-media/evo/apps/keycloak"
 )
 
 func main() {

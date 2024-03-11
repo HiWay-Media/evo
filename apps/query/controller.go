@@ -2,17 +2,18 @@ package query
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
+
 	"github.com/davecgh/go-spew/spew"
 	"github.com/fatih/structtag"
 	"github.com/getevo/evo"
-	"github.com/getevo/evo/errors"
-	"github.com/getevo/evo/lib/T"
-	"github.com/getevo/evo/lib/constant"
-	"github.com/getevo/evo/lib/sanitize"
-	"github.com/getevo/evo/lib/validate"
+	e "github.com/hiway-media/evo/errors"
+	"github.com/hiway-media/evo/lib/T"
+	"github.com/hiway-media/evo/lib/constant"
+	"github.com/hiway-media/evo/lib/sanitize"
+	"github.com/hiway-media/evo/lib/validate"
 	"gorm.io/gorm"
-	"reflect"
-	"strings"
 )
 
 type Controller struct{}

@@ -2,8 +2,9 @@ package query
 
 import (
 	"fmt"
+
 	"github.com/getevo/evo"
-	"github.com/getevo/evo/menu"
+	"github.com/hiway-media/evo/menu"
 	"gorm.io/gorm"
 )
 

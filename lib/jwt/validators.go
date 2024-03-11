@@ -1,9 +1,9 @@
 package jwt
 
 import (
-	"github.com/getevo/evo/lib/jwt/internal"
 	"time"
 
+	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 var (

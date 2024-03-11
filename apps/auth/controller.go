@@ -2,15 +2,16 @@ package auth
 
 import (
 	"fmt"
-	"github.com/getevo/evo"
-	e "github.com/getevo/evo/errors"
-	"github.com/getevo/evo/lib/T"
-	"github.com/getevo/evo/lib/constant"
-	"github.com/getevo/evo/lib/jwt"
-	"github.com/getevo/evo/lib/validate"
-	"gopkg.in/hlandau/passlib.v1"
 	"net/http"
 	"time"
+
+	"github.com/getevo/evo"
+	e "github.com/hiway-media/evo/errors"
+	"github.com/hiway-media/evo/lib/T"
+	"github.com/hiway-media/evo/lib/constant"
+	"github.com/hiway-media/evo/lib/jwt"
+	"github.com/hiway-media/evo/lib/validate"
+	"gopkg.in/hlandau/passlib.v1"
 )
 
 type Controller struct{}

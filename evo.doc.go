@@ -1,14 +1,15 @@
 package evo
 
 import (
-	"github.com/getevo/evo/lib/gpath"
-	"github.com/getevo/evo/menu"
 	"go/build"
 	"os"
 	"path/filepath"
 	"reflect"
 	"regexp"
 	"strings"
+
+	"github.com/hiway-media/evo/lib/gpath"
+	"github.com/hiway-media/evo/menu"
 )
 
 var Docs = []DocApp{}

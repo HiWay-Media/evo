@@ -1,8 +1,8 @@
 package jwtutil
 
 import (
-	"github.com/getevo/evo/lib/jwt"
-	"github.com/getevo/evo/lib/jwt/internal"
+	"github.com/hiway-media/evo/lib/jwt"
+	"github.com/hiway-media/evo/lib/jwt/internal"
 )
 
 // Resolver is an Algorithm resolver.

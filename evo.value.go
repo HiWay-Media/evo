@@ -2,11 +2,12 @@ package evo
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib"
 	"regexp"
 	"strconv"
 	"strings"
 	"unicode"
+
+	"github.com/hiway-media/evo/lib"
 )
 
 type value string

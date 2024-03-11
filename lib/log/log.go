@@ -2,15 +2,16 @@ package log
 
 import (
 	"fmt"
-	"github.com/getevo/evo/lib/date"
-	"github.com/getevo/evo/lib/log/logger"
-	"github.com/wzshiming/ctc"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/hiway-media/evo/lib/date"
+	"github.com/hiway-media/evo/lib/log/logger"
+	"github.com/wzshiming/ctc"
 )
 
 var log = logger.New()

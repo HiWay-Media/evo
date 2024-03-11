@@ -1,7 +1,7 @@
 <!--[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)-->
 ## EVO Web Application Development Framework
 [![Go Report Card](https://goreportcard.com/badge/github.com/iesreza/io)](https://goreportcard.com/report/github.com/iesreza/io)
-![Discord](https://img.shields.io/discord/731563126876536873) [![Discord Chat](https://img.shields.io/badge/Discord-Chat-informational)](https://discord.gg/RcmcKu5)    [![GitHub issues](https://img.shields.io/github/issues/getevo/evo)](https://github.com/getevo/evo/issues) [![GitHub stars](https://img.shields.io/github/stars/getevo/evo)](https://github.com/getevo/evo/stargazers) [![Gitter](https://badges.gitter.im/getevo-golang/community.svg)](https://gitter.im/getevo-golang/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+![Discord](https://img.shields.io/discord/731563126876536873) [![Discord Chat](https://img.shields.io/badge/Discord-Chat-informational)](https://discord.gg/RcmcKu5)    [![GitHub issues](https://img.shields.io/github/issues/getevo/evo)](https://github.com/hiway-media/evo/issues) [![GitHub stars](https://img.shields.io/github/stars/getevo/evo)](https://github.com/hiway-media/evo/stargazers) [![Gitter](https://badges.gitter.im/getevo-golang/community.svg)](https://gitter.im/getevo-golang/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
 EVO is a powerful package for quickly writing modular web applications/services in Golang aimed both backend and frontend.
@@ -33,7 +33,7 @@ EVO is a powerful package for quickly writing modular web applications/services 
 
 ## Documentation
 
-[Documentation (WIKI)](https://github.com/getevo/evo/wiki)  
+[Documentation (WIKI)](https://github.com/hiway-media/evo/wiki)  
 
 #### Quick Start
  - Installation
@@ -46,7 +46,7 @@ EVO is a powerful package for quickly writing modular web applications/services 
 - Journal App
 - Log App
 - Swagger
-- [Documentation (WIKI)](https://github.com/getevo/evo/wiki)  
+- [Documentation (WIKI)](https://github.com/hiway-media/evo/wiki)  
 - Sample Apps
 - Clear Libraries
 - Improve Manager
