@@ -1,4 +1,4 @@
-module github.com/getevo/evo
+module github.com/hiway-media/evo
 
 go 1.15
 
