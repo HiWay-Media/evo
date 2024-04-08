@@ -5,11 +5,10 @@ go 1.15
 require (
 	github.com/AlexanderGrom/go-event v0.0.0-20180406111247-a2f1486e096e
 	github.com/BurntSushi/toml v0.3.1
-	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/ajg/form v1.5.1
 	github.com/alecthomas/repr v0.0.0-20210301060118-828286944d6a
-	github.com/araddon/dateparse v0.0.0-20210207001429-0eec95c9db7e
+	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/avct/uasurfer v0.0.0-20191028135549-26b5daa857f1
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
 	github.com/cpuguy83/go-md2man v1.0.10
