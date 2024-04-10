@@ -4,14 +4,14 @@ go 1.15
 
 require (
 	github.com/BurntSushi/toml v1.3.2
-	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
+	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/ajg/form v1.5.1
-	github.com/alecthomas/repr v0.0.0-20210301060118-828286944d6a
+	github.com/alecthomas/repr v0.4.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/avct/uasurfer v0.0.0-20191028135549-26b5daa857f1
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
 	github.com/cpuguy83/go-md2man v1.0.10
-	github.com/creasty/defaults v1.5.1
+	github.com/creasty/defaults v1.7.0
 	github.com/cstockton/go-conv v0.0.0-20170524002450-66a2b2ba36e1
 	github.com/davecgh/go-spew v1.1.1
 	github.com/disintegration/imaging v1.6.2
@@ -19,7 +19,6 @@ require (
 	github.com/fatih/structtag v1.2.0
 	github.com/gbrlsnchs/jwt/v3 v3.0.0
 	github.com/getevo/go-arg v1.4.0
-	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
