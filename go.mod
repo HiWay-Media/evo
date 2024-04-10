@@ -17,7 +17,7 @@ require (
 	github.com/disintegration/imaging v1.6.2
 	github.com/fatih/structs v1.1.0
 	github.com/fatih/structtag v1.2.0
-	github.com/gbrlsnchs/jwt/v3 v3.0.0
+	github.com/gbrlsnchs/jwt/v3 v3.0.1
 	github.com/getevo/go-arg v1.4.0
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible
