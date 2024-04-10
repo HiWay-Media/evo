@@ -12,7 +12,7 @@ require (
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
 	github.com/cpuguy83/go-md2man v1.0.10
 	github.com/creasty/defaults v1.7.0
-	github.com/cstockton/go-conv v0.0.0-20170524002450-66a2b2ba36e1
+	github.com/cstockton/go-conv v1.0.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/disintegration/imaging v1.6.2
 	github.com/fatih/structs v1.1.0
