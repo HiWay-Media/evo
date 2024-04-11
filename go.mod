@@ -29,7 +29,7 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/klauspost/compress v1.17.8
 	github.com/leodido/go-urn v1.4.0
-	github.com/lithammer/shortuuid v3.0.0+incompatible
+	github.com/lithammer/shortuuid/v4 v4.0.0
 	github.com/magefile/mage v1.15.0
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/nbutton23/zxcvbn-go v0.0.0-20210217022336-fa2cb2858354
@@ -37,7 +37,6 @@ require (
 	github.com/onsi/gomega v1.32.0 // indirect
 	github.com/otiai10/copy v1.14.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
-	github.com/pkg/errors v0.9.1
 	github.com/pkg/sftp v1.13.6
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/tidwall/gjson v1.17.1
