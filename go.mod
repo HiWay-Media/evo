@@ -17,8 +17,7 @@ require (
 	github.com/fatih/structtag v1.2.0
 	github.com/gbrlsnchs/jwt/v3 v3.0.1
 	github.com/getevo/go-arg v1.4.0
-	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator v9.31.0+incompatible
+	github.com/go-playground/validator/v10 v10.19.0
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gocarina/gocsv v0.0.0-20231116093920-b87c2d0e983a
 	github.com/gofiber/fiber v1.14.6
@@ -52,7 +51,6 @@ require (
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
 	golang.org/x/text v0.14.0
 	golang.org/x/tools v0.20.0
-	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/hlandau/easymetric.v1 v1.0.0 // indirect
 	gopkg.in/hlandau/measurable.v1 v1.0.1 // indirect
 	gopkg.in/hlandau/passlib.v1 v1.0.11
