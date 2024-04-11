@@ -56,8 +56,8 @@ require (
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/hlandau/easymetric.v1 v1.0.0 // indirect
 	gopkg.in/hlandau/measurable.v1 v1.0.1 // indirect
-	gopkg.in/hlandau/passlib.v1 v1.0.10
-	gopkg.in/square/go-jose.v2 v2.5.1
+	gopkg.in/hlandau/passlib.v1 v1.0.11
+	gopkg.in/square/go-jose.v2 v2.6.0
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.0.4
 	gorm.io/driver/sqlite v1.1.4
