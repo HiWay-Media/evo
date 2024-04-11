@@ -8,7 +8,7 @@ require (
 	github.com/alecthomas/repr v0.4.0
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/avct/uasurfer v0.0.0-20191028135549-26b5daa857f1
-	github.com/cpuguy83/go-md2man v1.0.10
+	github.com/cpuguy83/go-md2man/v2 v2.0.4
 	github.com/creasty/defaults v1.7.0
 	github.com/cstockton/go-conv v1.0.0
 	github.com/davecgh/go-spew v1.1.1
