@@ -1,7 +1,7 @@
 package constant
 
 import (
-	"github.com/pkg/errors"
+	"errors"
 )
 
 var (
