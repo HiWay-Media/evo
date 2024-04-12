@@ -23,16 +23,16 @@ var (
 type CookieSameSite int
 
 const (
-	// CookieSameSiteDisabled removes the SameSite flag
+	// CookieSameSiteDisabled removes the SameSite flag.
 	CookieSameSiteDisabled CookieSameSite = iota
-	// CookieSameSiteDefaultMode sets the SameSite flag
+	// CookieSameSiteDefaultMode sets the SameSite flag.
 	CookieSameSiteDefaultMode
-	// CookieSameSiteLaxMode sets the SameSite flag with the "Lax" parameter
+	// CookieSameSiteLaxMode sets the SameSite flag with the "Lax" parameter.
 	CookieSameSiteLaxMode
-	// CookieSameSiteStrictMode sets the SameSite flag with the "Strict" parameter
+	// CookieSameSiteStrictMode sets the SameSite flag with the "Strict" parameter.
 	CookieSameSiteStrictMode
-	// CookieSameSiteNoneMode sets the SameSite flag with the "None" parameter
-	// see https://tools.ietf.org/html/draft-west-cookie-incrementalism-00
+	// CookieSameSiteNoneMode sets the SameSite flag with the "None" parameter.
+	// See https://tools.ietf.org/html/draft-west-cookie-incrementalism-00
 	CookieSameSiteNoneMode
 )
 
@@ -54,7 +54,7 @@ func ReleaseCookie(c *Cookie) {
 }
 
 var cookiePool = &sync.Pool{
-	New: func() interface{} {
+	New: func() any {
 		return &Cookie{}
 	},
 }
@@ -65,7 +65,7 @@ var cookiePool = &sync.Pool{
 //
 // Cookie instance MUST NOT be used from concurrently running goroutines.
 type Cookie struct {
-	noCopy noCopy //nolint:unused,structcheck
+	noCopy noCopy
 
 	key    []byte
 	value  []byte
@@ -85,12 +85,12 @@ type Cookie struct {
 // CopyTo copies src cookie to c.
 func (c *Cookie) CopyTo(src *Cookie) {
 	c.Reset()
-	c.key = append(c.key[:0], src.key...)
-	c.value = append(c.value[:0], src.value...)
+	c.key = append(c.key, src.key...)
+	c.value = append(c.value, src.value...)
 	c.expire = src.expire
 	c.maxAge = src.maxAge
-	c.domain = append(c.domain[:0], src.domain...)
-	c.path = append(c.path[:0], src.path...)
+	c.domain = append(c.domain, src.domain...)
+	c.path = append(c.path, src.path...)
 	c.httpOnly = src.httpOnly
 	c.secure = src.secure
 	c.sameSite = src.sameSite
@@ -122,7 +122,7 @@ func (c *Cookie) SameSite() CookieSameSite {
 }
 
 // SetSameSite sets the cookie's SameSite flag to the given value.
-// set value CookieSameSiteNoneMode will set Secure to true also to avoid browser rejection
+// Set value CookieSameSiteNoneMode will set Secure to true also to avoid browser rejection.
 func (c *Cookie) SetSameSite(mode CookieSameSite) {
 	c.sameSite = mode
 	if mode == CookieSameSiteNoneMode {
@@ -149,7 +149,8 @@ func (c *Cookie) SetPathBytes(path []byte) {
 
 // Domain returns cookie domain.
 //
-// The returned domain is valid until the next Cookie modification method call.
+// The returned value is valid until the Cookie reused or released (ReleaseCookie).
+// Do not store references to the returned value. Make copies instead.
 func (c *Cookie) Domain() []byte {
 	return c.domain
 }
@@ -171,16 +172,16 @@ func (c *Cookie) MaxAge() int {
 }
 
 // SetMaxAge sets cookie expiration time based on seconds. This takes precedence
-// over any absolute expiry set on the cookie
+// over any absolute expiry set on the cookie.
 //
-// Set max age to 0 to unset
+// Set max age to 0 to unset.
 func (c *Cookie) SetMaxAge(seconds int) {
 	c.maxAge = seconds
 }
 
 // Expire returns cookie expiration time.
 //
-// CookieExpireUnlimited is returned if cookie doesn't expire
+// CookieExpireUnlimited is returned if cookie doesn't expire.
 func (c *Cookie) Expire() time.Time {
 	expire := c.expire
 	if expire.IsZero() {
@@ -201,7 +202,8 @@ func (c *Cookie) SetExpire(expire time.Time) {
 
 // Value returns cookie value.
 //
-// The returned value is valid until the next Cookie modification method call.
+// The returned value is valid until the Cookie reused or released (ReleaseCookie).
+// Do not store references to the returned value. Make copies instead.
 func (c *Cookie) Value() []byte {
 	return c.value
 }
@@ -218,7 +220,8 @@ func (c *Cookie) SetValueBytes(value []byte) {
 
 // Key returns cookie name.
 //
-// The returned value is valid until the next Cookie modification method call.
+// The returned value is valid until the Cookie reused or released (ReleaseCookie).
+// Do not store references to the returned value. Make copies instead.
 func (c *Cookie) Key() []byte {
 	return c.key
 }
@@ -306,7 +309,8 @@ func (c *Cookie) AppendBytes(dst []byte) []byte {
 
 // Cookie returns cookie representation.
 //
-// The returned value is valid until the next call to Cookie methods.
+// The returned value is valid until the Cookie reused or released (ReleaseCookie).
+// Do not store references to the returned value. Make copies instead.
 func (c *Cookie) Cookie() []byte {
 	c.buf = c.AppendBytes(c.buf[:0])
 	return c.buf
@@ -345,8 +349,8 @@ func (c *Cookie) ParseBytes(src []byte) error {
 		return errNoCookies
 	}
 
-	c.key = append(c.key[:0], kv.key...)
-	c.value = append(c.value[:0], kv.value...)
+	c.key = append(c.key, kv.key...)
+	c.value = append(c.value, kv.value...)
 
 	for s.next(kv) {
 		if len(kv.key) != 0 {
@@ -378,34 +382,35 @@ func (c *Cookie) ParseBytes(src []byte) error {
 
 			case 'd': // "domain"
 				if caseInsensitiveCompare(strCookieDomain, kv.key) {
-					c.domain = append(c.domain[:0], kv.value...)
+					c.domain = append(c.domain, kv.value...)
 				}
 
 			case 'p': // "path"
 				if caseInsensitiveCompare(strCookiePath, kv.key) {
-					c.path = append(c.path[:0], kv.value...)
+					c.path = append(c.path, kv.value...)
 				}
 
 			case 's': // "samesite"
 				if caseInsensitiveCompare(strCookieSameSite, kv.key) {
-					// Case insensitive switch on first char
-					switch kv.value[0] | 0x20 {
-					case 'l': // "lax"
-						if caseInsensitiveCompare(strCookieSameSiteLax, kv.value) {
-							c.sameSite = CookieSameSiteLaxMode
-						}
-					case 's': // "strict"
-						if caseInsensitiveCompare(strCookieSameSiteStrict, kv.value) {
-							c.sameSite = CookieSameSiteStrictMode
-						}
-					case 'n': // "none"
-						if caseInsensitiveCompare(strCookieSameSiteNone, kv.value) {
-							c.sameSite = CookieSameSiteNoneMode
+					if len(kv.value) > 0 {
+						// Case insensitive switch on first char
+						switch kv.value[0] | 0x20 {
+						case 'l': // "lax"
+							if caseInsensitiveCompare(strCookieSameSiteLax, kv.value) {
+								c.sameSite = CookieSameSiteLaxMode
+							}
+						case 's': // "strict"
+							if caseInsensitiveCompare(strCookieSameSiteStrict, kv.value) {
+								c.sameSite = CookieSameSiteStrictMode
+							}
+						case 'n': // "none"
+							if caseInsensitiveCompare(strCookieSameSiteNone, kv.value) {
+								c.sameSite = CookieSameSiteNoneMode
+							}
 						}
 					}
 				}
 			}
-
 		} else if len(kv.value) != 0 {
 			// Case insensitive switch on first char
 			switch kv.value[0] | 0x20 {
