@@ -40,7 +40,7 @@ func newPktMgr(sender packetSender) *packetManager {
 	return s
 }
 
-//// packet ordering
+// // packet ordering
 func (s *packetManager) newOrderID() uint32 {
 	s.packetCount++
 	return s.packetCount
@@ -89,7 +89,7 @@ func (o orderedPackets) Sort() {
 	})
 }
 
-//// packet registry
+// // packet registry
 // register incoming packets to be handled
 func (s *packetManager) incomingPacket(pkt orderedRequest) {
 	s.working.Add(1)
@@ -114,7 +114,6 @@ func (s *packetManager) close() {
 // maximizing throughput of file transfers.
 func (s *packetManager) workerChan(runWorker func(chan orderedRequest),
 ) chan orderedRequest {
-
 	// multiple workers for faster read/writes
 	rwChan := make(chan orderedRequest, SftpServerWorkerCount)
 	for i := 0; i < SftpServerWorkerCount; i++ {

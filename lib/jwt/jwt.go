@@ -2,8 +2,9 @@ package jwt
 
 import (
 	"encoding/json"
-	"github.com/lithammer/shortuuid"
 	"time"
+
+	"github.com/lithammer/shortuuid/v4"
 )
 
 // Config jwt configuration
@@ -48,8 +49,8 @@ func Generate(data map[string]interface{}, extend ...time.Duration) (string, err
 		NotBefore:      NumericDate(now),
 		IssuedAt:       NumericDate(now),
 		JWTID:          shortuuid.New(),
-		Empty: false,
-		Data:  data,
+		Empty:          false,
+		Data:           data,
 	}
 	if len(extend) > 0 {
 		pl.ExpirationTime = NumericDate(now.Add(extend[0]))

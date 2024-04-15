@@ -2,8 +2,9 @@ package rdb
 
 import (
 	"fmt"
+
 	"github.com/getevo/evo"
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 type Source uint8

@@ -2,21 +2,21 @@ package evo
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"strings"
+	"time"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/sqlite"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
-	"os"
-	"strings"
-	"time"
 )
 
 var Database *gorm.DB
 
 func setupDatabase() {
-	Events.Go("database.starts")
 	config := config.Database
 	var err error
 	if config.Enabled == false {
@@ -75,8 +75,6 @@ func setupDatabase() {
 		panic(err)
 		return
 	}
-
-	Events.Go("database.started")
 
 }
 

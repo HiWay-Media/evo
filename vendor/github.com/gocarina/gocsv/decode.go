@@ -5,18 +5,24 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"reflect"
+)
+
+var (
+	ErrUnmatchedStructTags = errors.New("unmatched struct tags")
+	ErrDoubleHeaderNames   = errors.New("double header names")
 )
 
 // Decoder .
 type Decoder interface {
-	getCSVRows() ([][]string, error)
+	GetCSVRows() ([][]string, error)
 }
 
 // SimpleDecoder .
 type SimpleDecoder interface {
-	getCSVRow() ([]string, error)
-	getCSVRows() ([][]string, error)
+	GetCSVRow() ([]string, error)
+	GetCSVRows() ([][]string, error)
 }
 
 type CSVReader interface {
@@ -45,11 +51,11 @@ func NewSimpleDecoderFromCSVReader(r CSVReader) SimpleDecoder {
 	return csvDecoder{r}
 }
 
-func (c csvDecoder) getCSVRows() ([][]string, error) {
+func (c csvDecoder) GetCSVRows() ([][]string, error) {
 	return c.ReadAll()
 }
 
-func (c csvDecoder) getCSVRow() ([]string, error) {
+func (c csvDecoder) GetCSVRow() ([]string, error) {
 	return c.Read()
 }
 
@@ -103,7 +109,7 @@ func mismatchHeaderFields(structInfo []fieldInfo, headers []string) []string {
 func maybeMissingStructFields(structInfo []fieldInfo, headers []string) error {
 	missing := mismatchStructFields(structInfo, headers)
 	if len(missing) != 0 {
-		return fmt.Errorf("found unmatched struct field with tags %v", missing)
+		return fmt.Errorf("found unmatched struct field with tags %v, %w", missing, ErrUnmatchedStructTags)
 	}
 	return nil
 }
@@ -113,7 +119,7 @@ func maybeDoubleHeaderNames(headers []string) error {
 	headerMap := make(map[string]bool, len(headers))
 	for _, v := range headers {
 		if _, ok := headerMap[v]; ok {
-			return fmt.Errorf("repeated header name: %v", v)
+			return fmt.Errorf("repeated header name: %v, %w", v, ErrDoubleHeaderNames)
 		}
 		headerMap[v] = true
 	}
@@ -129,6 +135,11 @@ func normalizeHeaders(headers []string) []string {
 	return out
 }
 
+// convertTo converts multipart file to io.Reader
+func convertTo(file *multipart.File) io.Reader {
+	return io.Reader(*file)
+}
+
 func readTo(decoder Decoder, out interface{}) error {
 	return readToWithErrorHandler(decoder, nil, out)
 }
@@ -142,7 +153,7 @@ func readToWithErrorHandler(decoder Decoder, errHandler ErrorHandler, out interf
 	if err := ensureOutInnerType(outInnerType); err != nil {
 		return err
 	}
-	csvRows, err := decoder.getCSVRows() // Get the CSV csvRows
+	csvRows, err := decoder.GetCSVRows() // Get the CSV csvRows
 	if err != nil {
 		return err
 	}
@@ -154,7 +165,7 @@ func readToWithErrorHandler(decoder Decoder, errHandler ErrorHandler, out interf
 	}
 	outInnerStructInfo := getStructInfo(outInnerType) // Get the inner struct info to get CSV annotations
 	if len(outInnerStructInfo.Fields) == 0 {
-		return ErrEmptyCSVFile
+		return ErrNoStructTags
 	}
 
 	headers := normalizeHeaders(csvRows[0])
@@ -208,8 +219,11 @@ func readToWithErrorHandler(decoder Decoder, errHandler ErrorHandler, out interf
 						continue
 					}
 				}
-
-				if err := setInnerField(&outInner, outInnerWasPointer, fieldInfo.IndexChain, csvColumnContent, fieldInfo.omitEmpty); err != nil { // Set field of struct
+				value := csvColumnContent
+				if value == "" {
+					value = fieldInfo.defaultValue
+				}
+				if err := setInnerField(&outInner, outInnerWasPointer, fieldInfo.IndexChain, value, fieldInfo.omitEmpty); err != nil { // Set field of struct
 					parseError := csv.ParseError{
 						Line:   i + 2, //add 2 to account for the header & 0-indexing of arrays
 						Column: j + 1,
@@ -232,14 +246,14 @@ func readToWithErrorHandler(decoder Decoder, errHandler ErrorHandler, out interf
 	return nil
 }
 
-func readEach(decoder SimpleDecoder, c interface{}) error {
+func readEach(decoder SimpleDecoder, errHandler ErrorHandler, c interface{}) error {
 	outValue, outType := getConcreteReflectValueAndType(c) // Get the concrete type (not pointer)
 	if outType.Kind() != reflect.Chan {
 		return fmt.Errorf("cannot use %v with type %s, only channel supported", c, outType)
 	}
 	defer outValue.Close()
 
-	headers, err := decoder.getCSVRow()
+	headers, err := decoder.GetCSVRow()
 	if err != nil {
 		return err
 	}
@@ -277,7 +291,7 @@ func readEach(decoder SimpleDecoder, c interface{}) error {
 	}
 	i := 0
 	for {
-		line, err := decoder.getCSVRow()
+		line, err := decoder.GetCSVRow()
 		if err == io.EOF {
 			break
 		} else if err != nil {
@@ -287,10 +301,14 @@ func readEach(decoder SimpleDecoder, c interface{}) error {
 		for j, csvColumnContent := range line {
 			if fieldInfo, ok := csvHeadersLabels[j]; ok { // Position found accordingly to header name
 				if err := setInnerField(&outInner, outInnerWasPointer, fieldInfo.IndexChain, csvColumnContent, fieldInfo.omitEmpty); err != nil { // Set field of struct
-					return &csv.ParseError{
+					parseError := &csv.ParseError{
 						Line:   i + 2, //add 2 to account for the header & 0-indexing of arrays
 						Column: j + 1,
 						Err:    err,
+					}
+
+					if errHandler == nil || !errHandler(parseError) {
+						return parseError
 					}
 				}
 			}
@@ -319,7 +337,7 @@ func readEachWithoutHeaders(decoder SimpleDecoder, c interface{}) error {
 
 	i := 0
 	for {
-		line, err := decoder.getCSVRow()
+		line, err := decoder.GetCSVRow()
 		if err == io.EOF {
 			break
 		} else if err != nil {
@@ -351,7 +369,7 @@ func readToWithoutHeaders(decoder Decoder, out interface{}) error {
 	if err := ensureOutInnerType(outInnerType); err != nil {
 		return err
 	}
-	csvRows, err := decoder.getCSVRows() // Get the CSV csvRows
+	csvRows, err := decoder.GetCSVRows() // Get the CSV csvRows
 	if err != nil {
 		return err
 	}
@@ -447,10 +465,37 @@ func setInnerField(outInner *reflect.Value, outInnerWasPointer bool, index []int
 	if outInnerWasPointer {
 		// initialize nil pointer
 		if oi.IsNil() {
-			setField(oi, "", omitEmpty)
+			if err := setField(oi, "", omitEmpty); err != nil {
+				return err
+			}
 		}
 		oi = outInner.Elem()
 	}
+
+	if oi.Kind() == reflect.Slice || oi.Kind() == reflect.Array {
+		i := index[0]
+
+		// grow slice when needed
+		if i >= oi.Cap() {
+			newcap := oi.Cap() + oi.Cap()/2
+			if newcap < 4 {
+				newcap = 4
+			}
+			newoi := reflect.MakeSlice(oi.Type(), oi.Len(), newcap)
+			reflect.Copy(newoi, oi)
+			oi.Set(newoi)
+		}
+		if i >= oi.Len() {
+			oi.SetLen(i + 1)
+		}
+
+		item := oi.Index(i)
+		if len(index) > 1 {
+			return setInnerField(&item, false, index[1:], value, omitEmpty)
+		}
+		return setField(item, value, omitEmpty)
+	}
+
 	// because pointers can be nil need to recurse one index at a time and perform nil check
 	if len(index) > 1 {
 		nextField := oi.Field(index[0])

@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AlexanderGrom/go-event"
 	"github.com/getevo/evo/lib/gpath"
 	"github.com/getevo/evo/lib/jwt"
 	"github.com/getevo/evo/lib/log"
@@ -27,7 +26,6 @@ var (
 	//Public
 	app *fiber.App
 
-	Events          = event.New()
 	StatusCodePages = map[int]string{}
 	Any             func(request *Request) error
 	//private
@@ -153,7 +151,6 @@ func Run() {
 			return nil
 		})
 	}
-	Events.Go("init.after")
 
 	for _, item := range onReady {
 		item()
@@ -174,7 +171,6 @@ func Run() {
 	} else {
 		err = app.Listen(config.Server.Host + ":" + config.Server.Port)
 	}
-	Events.Go("server.panic")
 
 	log.Fatal(err)
 }
