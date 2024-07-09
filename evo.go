@@ -132,6 +132,14 @@ func Run() {
 	for _, item := range statics {
 		app.Static(item[0], item[1])
 	}
+
+	for _, item := range onReady {
+		item()
+	}
+	for prefix, _ := range viewList {
+		applyViewFunction(prefix)
+	}
+
 	if Any != nil {
 		app.Use(func(ctx *fiber.Ctx) error {
 			r := Upgrade(ctx)
@@ -152,12 +160,6 @@ func Run() {
 		})
 	}
 
-	for _, item := range onReady {
-		item()
-	}
-	for prefix, _ := range viewList {
-		applyViewFunction(prefix)
-	}
 	var err error
 	if config.Server.HTTPS {
 		cer, err := tls.LoadX509KeyPair(GuessPath(config.Server.Cert), GuessPath(config.Server.Key))
