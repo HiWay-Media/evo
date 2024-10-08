@@ -1,13 +1,15 @@
 package gpath
 
 import (
-	"github.com/getevo/evo/lib/text"
-	copy2 "github.com/otiai10/copy"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/getevo/evo/lib/log"
+	"github.com/getevo/evo/lib/text"
+	copy2 "github.com/otiai10/copy"
 )
 
 // MakePath create path recursive
@@ -45,7 +47,11 @@ func IsDirExist(path string) bool {
 // IsDir checks if  path is a directory
 func IsDir(path string) bool {
 	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+		log.Error("Unable to access fs:", err.Error())
 		return false
 	}
 	return info.IsDir()
