@@ -38,7 +38,11 @@ func RSlash(path string) string {
 // IsDirExist checks if is directory exist
 func IsDirExist(path string) bool {
 	info, err := os.Stat(path)
-	if os.IsNotExist(err) || info == nil {
+	if err != nil {
+		if os.IsNotExist(err) || info == nil {
+			return false
+		}
+		log.Error("Unable to access fs:", err.Error())
 		return false
 	}
 	return info.IsDir()
@@ -60,7 +64,11 @@ func IsDir(path string) bool {
 // IsFileExist checks if file exist
 func IsFileExist(path string) bool {
 	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+		log.Error("Unable to access fs:", err.Error())
 		return false
 	}
 	return !info.IsDir()
