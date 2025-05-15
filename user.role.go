@@ -3,6 +3,7 @@ package evo
 import (
 	"errors"
 	"fmt"
+
 	"github.com/getevo/evo/lib/log"
 	"github.com/getevo/evo/lib/validate"
 	"gorm.io/gorm"
@@ -12,22 +13,42 @@ var memoryRolePermissions = cMap{}
 
 func updateRolePermissions() {
 	memoryRolePermissions.Init()
+
+	// Load all roles at once
 	var roles []Role
 	db.Find(&roles)
+
+	// Load all role permissions at once
+	var rolePerms []RolePermission
+	db.Find(&rolePerms)
+
+	// Load all permissions at once
+	var permissions []Permission
+	db.Find(&permissions)
+
+	// Create maps for quick lookup
+	rolePermMap := make(map[uint][]RolePermission)
+	for _, rp := range rolePerms {
+		rolePermMap[rp.RoleID] = append(rolePermMap[rp.RoleID], rp)
+	}
+
+	permissionMap := make(map[uint]Permission)
+	for _, perm := range permissions {
+		permissionMap[perm.ID] = perm
+	}
+
+	// Process roles and their permissions
 	for _, role := range roles {
-		var rolePerms []RolePermission
-		db.Where("role_id = ?", role.ID).Find(&rolePerms)
-		var permissions Permissions
-		for _, perm := range rolePerms {
-			var p Permission
-			if errors.Is(db.Where("id = ?", perm.PermissionID).Take(&p).Error, gorm.ErrRecordNotFound) {
-				log.Warning("Roles: found inconsistency, automatically remove permission id %d to fix.", perm.PermissionID)
-				db.Delete(RolePermission{}, "id = ?", perm.PermissionID)
+		var perms Permissions
+		for _, rp := range rolePermMap[role.ID] {
+			if perm, exists := permissionMap[rp.PermissionID]; exists {
+				perms = append(perms, perm)
 			} else {
-				permissions = append(permissions, p)
+				log.Warning("Roles: found inconsistency, automatically remove permission id %d to fix.", rp.PermissionID)
+				db.Delete(&RolePermission{}, "id = ?", rp.ID)
 			}
 		}
-		memoryRolePermissions.Set(role.ID, &permissions)
+		memoryRolePermissions.Set(role.ID, &perms)
 	}
 }
 
