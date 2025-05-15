@@ -129,9 +129,22 @@ func Run() {
 	}
 	parseArgs(false)
 
+	maxAge := config.Server.MaxAge
+	if maxAge <= 0 {
+		maxAge = defaultMaxAge
+	}
+
+	cacheDuration := config.Server.CacheDuration
+	if cacheDuration <= 0 {
+		cacheDuration = defaultCacheDuration
+	}
+
 	//Static Files
 	for _, item := range statics {
-		app.Static(item[0], item[1])
+		app.Static(item[0], item[1], fiber.Static{
+			MaxAge:        maxAge,
+			CacheDuration: cacheDuration,
+		})
 	}
 
 	for _, item := range onReady {
