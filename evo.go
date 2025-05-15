@@ -47,12 +47,13 @@ func Setup() {
 	}
 
 	app = fiber.New(fiber.Config{
-		Prefork:       config.Tweaks.PreFork,
-		StrictRouting: config.Server.StrictRouting,
-		CaseSensitive: config.Server.CaseSensitive,
-		ServerHeader:  config.Server.Name,
-		BodyLimit:     int(bodySize),
-		ProxyHeader:   config.Server.ProxyHeader,
+		Prefork:           config.Tweaks.PreFork,
+		StrictRouting:     config.Server.StrictRouting,
+		CaseSensitive:     config.Server.CaseSensitive,
+		ServerHeader:      config.Server.Name,
+		BodyLimit:         int(bodySize),
+		ProxyHeader:       config.Server.ProxyHeader,
+		ReduceMemoryUsage: config.Server.ReduceMemoryUsage,
 	})
 
 	if config.CORS.Enabled {

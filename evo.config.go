@@ -61,19 +61,20 @@ type Configuration struct {
 	} `yaml:"jwt"`
 
 	Server struct {
-		Host          string `yaml:"host"`
-		Port          string `yaml:"port"`
-		Cert          string `yaml:"cert"`
-		Key           string `yaml:"key"`
-		HTTPS         bool   `yaml:"https"`
-		Name          string `yaml:"name"`
-		MaxUploadSize string `yaml:"max-upload-size"`
-		StrictRouting bool   `yaml:"strict-routing"`
-		CaseSensitive bool   `yaml:"case-sensitive"`
-		RequestID     bool   `yaml:"request-id"`
-		Debug         bool   `yaml:"debug"`
-		Recover       bool   `yaml:"recover"`
-		ProxyHeader   string `yaml:"proxy-header"`
+		Host              string `yaml:"host"`
+		Port              string `yaml:"port"`
+		Cert              string `yaml:"cert"`
+		Key               string `yaml:"key"`
+		HTTPS             bool   `yaml:"https"`
+		Name              string `yaml:"name"`
+		MaxUploadSize     string `yaml:"max-upload-size"`
+		StrictRouting     bool   `yaml:"strict-routing"`
+		CaseSensitive     bool   `yaml:"case-sensitive"`
+		RequestID         bool   `yaml:"request-id"`
+		Debug             bool   `yaml:"debug"`
+		Recover           bool   `yaml:"recover"`
+		ProxyHeader       string `yaml:"proxy-header"`
+		ReduceMemoryUsage bool   `yaml:"reduce-memory-usage"`
 	} `yaml:"server"`
 
 	Database struct {
