@@ -134,8 +134,8 @@ func Run() {
 		maxAge = defaultMaxAge
 	}
 
-	cacheDuration := config.Server.CacheDuration
-	if cacheDuration <= 0 {
+	cacheDuration, parseErr := time.ParseDuration(config.Server.CacheDuration)
+	if parseErr != nil {
 		cacheDuration = defaultCacheDuration
 	}
 
