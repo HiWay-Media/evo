@@ -4,11 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/iesreza/jet/v8"
 	"net/url"
 	"reflect"
 	"strings"
+	"sync"
 	"time"
+
+	"github.com/iesreza/jet/v8"
 
 	e "github.com/getevo/evo/errors"
 	"github.com/getevo/evo/lib/jwt"
@@ -47,6 +49,12 @@ type URL struct {
 	Scheme string
 	Path   string
 	Raw    string
+}
+
+var bufferPool = sync.Pool{
+	New: func() interface{} {
+		return new(bytes.Buffer)
+	},
 }
 
 func (response Response) HasError() bool {
@@ -138,9 +146,11 @@ func (r *Request) Persist() {
 
 func (r *Request) View(mixed ...interface{}) {
 	buff := r.RenderView(mixed...)
-	buff.Bytes()
+	defer func() {
+		buff.Reset()
+		bufferPool.Put(buff)
+	}()
 	r.SendHTML(buff.Bytes())
-	buff = nil
 }
 
 type View func(*Request, jet.VarMap) []interface{}
@@ -203,7 +213,7 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 			input = ref.Interface()
 		}
 	}
-	var buff bytes.Buffer
+
 	vars.Set("base", r.Context.Protocol()+"://"+r.Context.Hostname())
 	vars.Set("proto", r.Context.Protocol())
 	vars.Set("hostname", r.Context.Hostname())
@@ -234,27 +244,40 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 		vars.Set(key, val)
 	}
 
-	for _, view := range views {
-		buff = bytes.Buffer{}
+	buff := bufferPool.Get().(*bytes.Buffer)
+	buff.Reset()
+
+	tmpBuff := bufferPool.Get().(*bytes.Buffer)
+	tmpBuff.Reset()
+	defer bufferPool.Put(tmpBuff)
+	for i, view := range views {
 		parts := strings.Split(view, ".")
+		if len(parts) <= 1 {
+			continue
+		}
 
-		if len(parts) > 1 {
-			t, err := GetView(parts[0], strings.Join(parts[1:], "."))
-			if err == nil {
-				err = t.Execute(&buff, vars, map[string]interface{}{})
-				if err != nil {
-					log.Error(err)
-				}
-			} else {
+		t, err := GetView(parts[0], strings.Join(parts[1:], "."))
+		if err != nil {
+			log.Error(err)
+			continue
+		}
+
+		// Use a temporary buffer for all views except the last one
+		if i < len(views)-1 {
+			tmpBuff.Reset()
+			if err := t.Execute(tmpBuff, vars, nil); err != nil {
 				log.Error(err)
-				log.Error(parts)
 			}
-			vars.Set("body", buff.Bytes())
-
+			vars.Set("body", tmpBuff.Bytes()) // intermediate result for use in next views
+		} else {
+			// Final view writes to main buffer
+			if err := t.Execute(buff, vars, nil); err != nil {
+				log.Error(err)
+			}
 		}
 	}
-	vars = nil
-	return &buff
+
+	return buff
 }
 
 func (r *Request) Cached(duration time.Duration, key ...string) bool {
