@@ -54,6 +54,7 @@ func Setup() {
 		BodyLimit:         int(bodySize),
 		ProxyHeader:       config.Server.ProxyHeader,
 		ReduceMemoryUsage: config.Server.ReduceMemoryUsage,
+		StreamRequestBody: config.Server.StreamRequestBody,
 	})
 
 	if config.CORS.Enabled {

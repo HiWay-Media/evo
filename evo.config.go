@@ -82,6 +82,7 @@ type Configuration struct {
 		ReduceMemoryUsage bool   `yaml:"reduce-memory-usage"`
 		MaxAge            int    `yaml:"static-max-age"`
 		CacheDuration     string `yaml:"static-cache-duration"`
+		StreamRequestBody bool   `yaml:"stream-request-body"`
 	} `yaml:"server"`
 
 	Database struct {
