@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/url"
 	"reflect"
 	"strings"
@@ -145,18 +146,17 @@ func (r *Request) Persist() {
 }
 
 func (r *Request) View(mixed ...interface{}) {
-	buff := r.RenderView(mixed...)
-	defer func() {
-		buff.Reset()
-		bufferPool.Put(buff)
-	}()
-	r.SendHTML(buff.Bytes())
+	r.Set("Content-Type", "text/html")
+	writer := r.Context.Context().Response.BodyWriter()
+	err := r.RenderView(writer, mixed...)
+	if err != nil {
+		r.Context.Context().SetStatusCode(500)
+	}
 }
 
 type View func(*Request, jet.VarMap) []interface{}
 
-func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
-	//input interface{}, views ...string
+func (r *Request) RenderView(writer io.Writer, mixed ...interface{}) error {
 	var input interface{}
 	vars := jet.VarMap{}
 	var views []string
@@ -181,28 +181,27 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 				resp = fn(r, vars)
 			}
 			for _, p := range resp {
-				var in = reflect.ValueOf(p)
-				switch in.Kind() {
+				val := reflect.ValueOf(p)
+				switch val.Kind() {
 				case reflect.String:
-					views = append(views, fmt.Sprint(in.Interface()))
+					views = append(views, fmt.Sprint(val.Interface()))
 				case reflect.Map:
-					for _, k := range in.MapKeys() {
-						vars.Set(fmt.Sprint(k.Interface()), in.MapIndex(k).Interface())
+					for _, k := range val.MapKeys() {
+						vars.Set(fmt.Sprint(k.Interface()), val.MapIndex(k).Interface())
 					}
-				default:
 				}
 			}
 		case reflect.Slice, reflect.Array:
-			for i := 0; i < ref.Len(); i += 1 {
-				var in = reflect.ValueOf(ref.Index(i).Interface())
-				switch in.Kind() {
+			for i := 0; i < ref.Len(); i++ {
+				elem := ref.Index(i).Interface()
+				val := reflect.ValueOf(elem)
+				switch val.Kind() {
 				case reflect.String:
-					views = append(views, fmt.Sprint(in.Interface()))
+					views = append(views, fmt.Sprint(val.Interface()))
 				case reflect.Map:
-					for _, k := range in.MapKeys() {
-						vars.Set(fmt.Sprint(k.Interface()), in.MapIndex(k).Interface())
+					for _, k := range val.MapKeys() {
+						vars.Set(fmt.Sprint(k.Interface()), val.MapIndex(k).Interface())
 					}
-				default:
 				}
 			}
 		case reflect.Map:
@@ -219,19 +218,12 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 	vars.Set("hostname", r.Context.Hostname())
 	vars.Set("request", r)
 
-	ref := reflect.ValueOf(input)
-	kind := ref.Kind()
-	/*	if kind == reflect.Map {
-		for _, k := range ref.MapKeys() {
-			vars.Set(k.String(), ref.MapIndex(k).Interface())
-		}
-	}*/
 	if v, ok := input.(map[string]interface{}); ok {
 		for key, value := range v {
 			vars.Set(key, value)
 		}
-	} else if kind == reflect.String {
-		vars.Set("body", input.(string))
+	} else if s, ok := input.(string); ok {
+		vars.Set("body", s)
 	} else {
 		vars.Set("param", input)
 	}
@@ -243,9 +235,6 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 	for key, val := range viewGlobalParams {
 		vars.Set(key, val)
 	}
-
-	buff := bufferPool.Get().(*bytes.Buffer)
-	buff.Reset()
 
 	tmpBuff := bufferPool.Get().(*bytes.Buffer)
 	tmpBuff.Reset()
@@ -262,22 +251,26 @@ func (r *Request) RenderView(mixed ...interface{}) *bytes.Buffer {
 			continue
 		}
 
-		// Use a temporary buffer for all views except the last one
+		// If not the last view, render to temporary buffer
 		if i < len(views)-1 {
 			tmpBuff.Reset()
 			if err := t.Execute(tmpBuff, vars, nil); err != nil {
 				log.Error(err)
 			}
-			vars.Set("body", tmpBuff.Bytes()) // intermediate result for use in next views
+			// Make a copy of the buffer's content to avoid reuse issues
+			body := make([]byte, tmpBuff.Len())
+			copy(body, tmpBuff.Bytes())
+			vars.Set("body", body)
 		} else {
-			// Final view writes to main buffer
-			if err := t.Execute(buff, vars, nil); err != nil {
+			// Final view renders directly to the HTTP response stream
+			if err := t.Execute(writer, vars, nil); err != nil {
 				log.Error(err)
+				return err
 			}
 		}
 	}
 
-	return buff
+	return nil
 }
 
 func (r *Request) Cached(duration time.Duration, key ...string) bool {
