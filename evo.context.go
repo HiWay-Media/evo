@@ -257,10 +257,7 @@ func (r *Request) RenderView(writer io.Writer, mixed ...interface{}) error {
 			if err := t.Execute(tmpBuff, vars, nil); err != nil {
 				log.Error(err)
 			}
-			// Make a copy of the buffer's content to avoid reuse issues
-			body := make([]byte, tmpBuff.Len())
-			copy(body, tmpBuff.Bytes())
-			vars.Set("body", body)
+			vars.Set("body", tmpBuff.String())
 		} else {
 			// Final view renders directly to the HTTP response stream
 			if err := t.Execute(writer, vars, nil); err != nil {
